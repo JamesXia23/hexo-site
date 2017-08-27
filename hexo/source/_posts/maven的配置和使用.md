@@ -54,6 +54,7 @@ categories:
     maven配置文件：
         + 配置本地仓库的地址，以及服务器的地址
     - bin：maven可执行的命令
+
 ### 测试maven
 * 首先需要安装jdk，这里不再赘述
 
@@ -89,7 +90,7 @@ maven本地仓库默认是在：${user.home}/.m2/repository
 * 配置中心仓库
 中心仓库不用配置，默认即可
 
-## maven管理jar包依赖
+## maven的使用
 ### maven术语
 * maven软件构建生命周期
 清除 -> 编译 -> 测试 -> 报告 -> 打包（jar\war） -> 安装 -> 部署到远程
@@ -101,3 +102,75 @@ clean -> compile -> test -> package -> install -> deploy
     - groupId：一般是公司标识，如：cn.jamesxia
     - artifactId：构建物id，一般是应用标识
     - version：版本号
+
+### 一个maven项目的目录结构
+在你要编写项目的地方，新建一个文件夹，名称作为你的项目名称，然后根据下图目录层级创建maven项目
+
+{% qnimg post4-7.png title:目录结构 alt:目录结构 %}
+
+* 在java文件夹中编写你的java包和java类，比如cn/james/demo/Hello.java
+{% qnimg post4-8.png title:编写helloworld alt:编写helloworld %}
+* resources文件夹可以先放空，反正现在也没啥资源
+* target文件夹可以不创建，使用maven构建项目时会自动创建
+* pom.xml，下一节会讲
+
+### 配置pom.xml
+上面说的maven坐标可以唯一标识一个jar/war包，那我们应该在哪里标识呢，答案是在整个项目的根文件夹下，新建一个pom.xml，下面是一份简单的pom文件以及一些标签的说明：
+{% codeblock %}
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+      <!--pom 版本-->
+      <modelVersion>4.0.0</modelVersion>
+      <!--组id  
+         maven 用坐标概念来标识 jar包
+          坐标=groupId+artifactId+version
+      -->
+      <groupId>cn.jamesxia.demo</groupId>
+      <!--构建物id ：产品id-->
+      <artifactId>Hello</artifactId>
+      <!--版本 ：SNAPSHOT :测试版本 ，镜像版本   release ：发行版本，最终版本-->
+      <version>0.0.1-SNAPSHOT</version>
+      <!--发布的是jar包  ，默认是jar包，也可以使war包等-->
+      <packaging>jar</packaging>
+      <!--项目名称 ，可写可不写-->
+      <name>Hello</name>
+        <dependencies>
+          <!--jar包声明式依赖  依赖  junit4.9jar包-->
+            <dependency>
+               <!--用坐标来标识jar包： 坐标=groupId+artifactId+version -->
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.9</version>
+                <!--依赖的jar包的使用范围 ： 当测试时使用该jar包
+                    test 、 compile（默认）  
+                -->
+                <scope>test</scope>
+            </dependency>       
+        </dependencies>
+    </project>
+{% endcodeblock %}
+
+后面项目如果有其他需要引用的jar包，直接在dependencies标签下新建一个dependency标签，填好maven的坐标就行了，有没有不用自己填的方法，of course~
+
+* 在maven中心仓库中拷贝依赖
+    - 访问 {% link maven中心仓库 http://search.maven.org/ %}
+    {% qnimg post4-3.png title:中心仓库 alt:中心仓库 %}
+    - 在搜索框中搜索需要的jar包，比如spring
+    {% qnimg post4-4.png title:搜索spring alt:搜索spring %}
+    - 选择要使用的jar包，如果org.springframework.spring，点击all，可以看到所有版本
+    {% qnimg post4-5.png title:spring所有版本 alt:spring所有版本 %}
+    - 随便选择一个版本，点击Version，比如2.5.6
+    {% qnimg post4-6.png title:复制依赖 alt:复制依赖 %}
+    复制上图中红框中的内容到pom.xml中，保存，maven就会自动给我们下载spring以及其依赖的所有jar包
+
+### 使用maven构建项目
+软件构建步骤：清除 -> 编译 -> 测试 -> 报告 -> 打包（jar\war） -> 安装 -> 部署到远程
+
+每个步骤都对应一个mvn命令（没有报告这个命令）：clean -> compile -> test -> package -> install -> deploy
+
+下面来讲讲如果使用这些命令，在windows命令行中，cd进入刚才创建的项目文件夹中，然后：
+{% codeblock %}
+mvn clean
+{% endcodeblock %}
+
+`year`
+
