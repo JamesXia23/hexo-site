@@ -46,15 +46,31 @@ date:
             + control + alt + x : 导出为html
 
 ### Node.js
-安装 Hexo 之前需要安装Node.js
+安装 Hexo 之前需要安装Node.js，Node.js是什么可以参考我的另一篇{% link 文章 https://jamesxia23.github.io/2017/09/25/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8E%AF%E5%A2%83/ %}
+，这里不再赘述，直接上安装步骤：
+1. 安装nvm
++ Mac&linux安装nvm
+    - 首先确保你的用户主目录下有.bash_profile文件，没有就创建一个：
+    ```
+    touch .bash_profile
+    ```
+    - 然后运行curl命令
+    ```bash
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+    ```
+    - 最后验证是否安装成功：
+    {% qnimg post5-1.png title:mac验证nvm安装 alt:mac验证nvm安装 %}
++ Windows安装nvm
+    - 下载 {% link nvm https://github.com/coreybutler/nvm-windows/releases %} 
+    {% qnimg post5-2.png title:windows上下载nvm alt:windows上下载nvm %}
+    - 下载完解压，双击nvm-setup安装，一直下一步就行了
+    - 安装完在cmd中键入``nvm version``验证是否安装成功
 
-* {% link 下载链接 https://nodejs.org/en/download/ %}
-* 安装很简单，一直下一步就行
-* 安装完成后，记得检查我的电脑-右键属性-环境变量-高级系统设置-环境变量 path 里面有没有node.js的安装目录，没有的话就添加进去
-    
-    {% qnimg post1-2.png title:path alt:path %}
-
-* 最后在命令行验证是否配置成功：
+2. 安装Node.js
++ 打开终端，运行命令 `` nvm install node版本号 `` ，如： `` nvm install 8.4.0 ``
++ 待到安装完成后，运行 `` nvm list `` 可以查看系统中所有存在的node版本
++ 使用 `` nvm use 版本号 `` 可以切换当前使用的nvm的版本
++ 最后在命令行验证是否配置成功：
 
     {% codeblock %}
     node --version
@@ -200,4 +216,4 @@ hexo clean && hexo g -d
 
 ### 什么是图床
 
-未完待续。。。。。。近期更新
+未完待续。。。。。。近期更新啦啦啦啦
