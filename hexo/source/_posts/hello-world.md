@@ -11,47 +11,50 @@ date:
 
 ### git and github
 
-* git：版本控制工具，{% link 下载地址 https://git-scm.com/downloads （外网，有科学上网会快一点）%}，关于git的配置请看 {% link 官方文档 https://git-scm.com/book/zh/v2 %}
-* github：代码托管仓库，我们要将建站的文件以及我们的博客文件分别托管到两个仓库中。
-    - {% link 注册 https://github.com/join %}&{% link 登录 https://github.com/login %} github
+- git：版本控制工具，[下载地址]( https://git-scm.com/downloads ) （外网，有科学上网会快一点），关于git的配置请看[官方文档](https://git-scm.com/book/zh/v2) 
+
+- github：代码托管仓库，我们要将建站的文件以及我们的博客文件分别托管到两个仓库中。
+    - [注册](https://github.com/join) & [登录](https://github.com/login) github
     - 创建两个仓库：
-        + hexo-source：名称可以任意取，用来管理建立的网站文件
-        + 账号名.github.io：其中账号名就是你的github账号的名称
+		- hexo-source：名称可以任意取，用来管理建立的网站文件
+		- 账号名.github.io：其中账号名就是你的github账号的名称
 
 ### sublime text 3
 
 博客编写使用的语言是markdown，所以我选择了sublime(ST3)作为编辑器。
-* {% link 下载 https://www.sublimetext.com/3 %}，安装ST3
-* 安装packet control(ST3安装插件的工具)
-使用快捷键ctrl + `，调出sublime的控制台，在控制台中输入以下代码，回车，等待。。。
+- [下载](https://www.sublimetext.com/3)，安装ST3
 
-    {% codeblock %}
-    import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
-    {% endcodeblock %}
+- 安装packet control(ST3安装插件的工具)
+  使用快捷键ctrl + `，调出sublime的控制台，在控制台中输入以下代码，回车，等待。。。
 
-* 安装markdown相关插件
+  ```console
+  import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+  ```
+
+- 安装markdown相关插件
     - 装完packet control后，在ST3中使用快捷键ctrl + shift + p ，输入install，选择install package：
-    
+
     {% qnimg post1-1.png title:install alt:install %}
-    
+
     - 搜索 MarkdownEditing 安装
-    
+
         MarkdownEditing是Markdown写作者必备的插件，它可以不仅可以高亮显示Markdown语法还支持很多编程语言的语法高亮显示，安装完成后要重启sublime
-    
+
     - 搜索 OmniMarkupPreviewer 安装
-    
+
         OmniMarkupPreviewer用来预览markdown编辑的效果，同样支持渲染代码高亮的样式
+
         快捷键：
-            + control + alt + o : 在浏览器中预览
-            + control + alt + x : 导出为html
+
+        - control + alt + o : 在浏览器中预览
+        - control + alt + x : 导出为html
 
 ### Node.js
-安装 Hexo 之前需要安装Node.js，Node.js是什么可以参考我的另一篇{% link 文章 https://jamesxia23.github.io/2017/09/25/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8E%AF%E5%A2%83/ %}
-，这里不再赘述，直接上安装步骤：
+安装 Hexo 之前需要安装Node.js，Node.js是什么可以参考我的另一篇[文章](https://jamesxia23.github.io/2017/09/25/%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%8E%AF%E5%A2%83/)，这里不再赘述，直接上安装步骤：
 1. 安装nvm
-+ Mac&linux安装nvm
+- Mac&linux安装nvm
     - 首先确保你的用户主目录下有.bash_profile文件，没有就创建一个：
-    ```
+    ```bash
     touch .bash_profile
     ```
     - 然后运行curl命令
@@ -60,26 +63,29 @@ date:
     ```
     - 最后验证是否安装成功：
     {% qnimg post5-1.png title:mac验证nvm安装 alt:mac验证nvm安装 %}
-+ Windows安装nvm
-    - 下载 {% link nvm https://github.com/coreybutler/nvm-windows/releases %} 
+- Windows安装nvm
+    - 下载 [nvm](https://github.com/coreybutler/nvm-windows/releases)
     {% qnimg post5-2.png title:windows上下载nvm alt:windows上下载nvm %}
     - 下载完解压，双击nvm-setup安装，一直下一步就行了
     - 安装完在cmd中键入``nvm version``验证是否安装成功
 
 2. 安装Node.js
 + 打开终端，运行命令 `` nvm install node版本号 `` ，如： `` nvm install 8.4.0 ``
+
 + 待到安装完成后，运行 `` nvm list `` 可以查看系统中所有存在的node版本
+
 + 使用 `` nvm use 版本号 `` 可以切换当前使用的nvm的版本
+
 + 最后在命令行验证是否配置成功：
 
-    {% codeblock %}
+    ```console
     node --version
-    {% endcodeblock %}
+    ```
 
     {% qnimg post1-3.png title:version alt:version %}
 
 ## 安装 Hexo
-重头戏来了，安装完 git 和 Node.js 后，就要来安装我们的博客系统了，附上 {% link 官方文档 https://hexo.io/zh-cn/docs/ %}
+重头戏来了，安装完 git 和 Node.js 后，就要来安装我们的博客系统了，附上[官方文档](https://hexo.io/zh-cn/docs/)
 
 ### 什么是 Hexo
 Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
@@ -93,9 +99,9 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 
 * 运行 git 命令，克隆仓库：
 
-    {% codeblock %}
+    ```git bash
     git clone https://github.com/用户名/仓库名.git
-    {% endcodeblock %}
+    ```
 
     {% qnimg post1-5.png title:克隆仓库 alt:克隆仓库 %}
 
@@ -108,15 +114,15 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 ### 安装 Hexo
 * 在 git bash 中，进入仓库 hexo-source，运行命令，安装 hexo 命令行：
 
-    {% codeblock %}
+    ```git bash
     npm install -g hexo-cli
-    {% endcodeblock %}
+    ```
 
 * 之后，初始化 hexo：
 
-    {% codeblock %}
+    ```git bash
     hexo init folder
-    {% endcodeblock %}
+    ```
 
     这里folder名称任取，最好不要是中文，我就取hexo：
 
@@ -126,16 +132,16 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 
 * 接下来，进入hexo文件夹，运行命令：
 
-    {% codeblock %}
+    ```git bash
     cd hexo
     npm install
-    {% endcodeblock %}
+    ```
 
     做完之后，你的本地 hexo 就搭建好了，在hexo文件夹中运行：
 
-    {% codeblock %}
+    ```git bash
     hexo server
-    {% endcodeblock %}
+    ```
 
     然后使用浏览器进入：localhost:4000，就可以看到你的网站了
     当然，我们要的是不只是本地访问，我们要部署到github我们创建的第二个仓库中
@@ -145,7 +151,7 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 ### 配置_config.yml
 进入hexo文件夹，里面就会是这样的：
 
-{% codeblock %}
+```explorer
 .
 ├── _config.yml
 ├── package.json
@@ -154,23 +160,21 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 |   ├── _drafts
 |   └── _posts
 └── themes
-{% endcodeblock %}
+```
 
-这些文件夹和文件分别有什么用， {% link 官方文档 https://hexo.io/zh-cn/docs/setup.html %} 都有说，这里说一下 _config.yml，这个是全站的配置文件，说几个必须配置的：
+这些文件夹和文件分别有什么用， [官方文档](https://hexo.io/zh-cn/docs/setup.html )都有说，这里说一下 ``_config.yml``，这个是全站的配置文件，说几个必须配置的：
 
-{% codeblock %}
-title: Hexo #网站标题
-subtitle:   #网站副标题
+```sublime
+title: Hexo  #网站标题
+subtitle:    #网站副标题
 description: #网站描述
-author:     #网站作者
-
+author:      #网站作者
 url: # http://你的github用户名.github.io (重要) 
-
 deploy: #这个是为了发布到github上去，所以要配置仓库
   type: git
   repo: https://github.com/你的github用户名/你的github用户名.github.io.git
   branch: master
-{% endcodeblock %}
+```
 
 PS：需要注意的一点是，所有配置项的值跟冒号之间一定要用空格隔开，如："title: Hexo"
 
@@ -188,7 +192,7 @@ PS：需要注意的一点是，所有配置项的值跟冒号之间一定要用
 
 * hexo generate
 
-    将我们写的markdown文件转变为静态文件
+    将我们写的markdown文件编译为html文件
 
 * hexo deploy
 
@@ -198,15 +202,15 @@ PS：需要注意的一点是，所有配置项的值跟冒号之间一定要用
 
     清除缓存，生成文件，发布到远端，一站式搞定。居家旅行，必备命令~
 
-    其余命令可以看 {% link 文档 https://hexo.io/zh-cn/docs/commands.html %}
+    其余命令可以看[官方文档]( https://hexo.io/zh-cn/docs/commands.html )
 
 ### 部署到github
 
 使用刚才的命令：
 
-{% codeblock %}
+```git bash
 hexo clean && hexo g -d
-{% endcodeblock %}
+```
 
 {% qnimg post1-8.png title:发布到github alt:发布到github %}
 
@@ -216,4 +220,4 @@ hexo clean && hexo g -d
 
 ### 什么是图床
 
-未完待续。。。。。。近期更新啦啦啦啦
+未完待续。。。。。。明天更新啦啦啦啦
