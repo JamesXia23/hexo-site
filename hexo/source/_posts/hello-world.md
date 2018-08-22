@@ -222,15 +222,15 @@ hexo clean && hexo g -d
 
 1. 注册自己的域名，我选择在[阿里云](https://wanwang.aliyun.com/domain)上买，其实其他云上面也可以买
 
-{% qnimg hello-world-8.png title:域名搜索 alt:域名搜索 %}
+   {% qnimg hello-world-8.png title:域名搜索 alt:域名搜索 %}
 
 2. 搜索自己喜欢的域名，只要还没被注册就可以买了，购买也很简单，用支付宝付款就行了
 
-{% qnimg hello-world-9.png title:域名搜索结果 alt:域名搜索结果 %}
+   {% qnimg hello-world-9.png title:域名搜索结果 alt:域名搜索结果 %}
 
-购买的时候记得买一下域名解析的服务
+   购买的时候记得买一下域名解析的服务
 
-{% qnimg hello-world-10.png title:域名解析 alt:域名解析 %}
+   {% qnimg hello-world-10.png title:域名解析 alt:域名解析 %}
 
 3. 付款之后会让你做实名认证，也是按照提示来就行，一般1个小时内就给你批下来了
 
@@ -266,4 +266,98 @@ hexo clean && hexo g -d
 
 ### 什么是图床
 
-未完待续。。。。。。明天更新啦啦啦啦
+图床一般是指储存图片的服务器 ，就是说我们可以把博客里面的图片存储在别的服务器上，这样做可以节省访问git page的带宽，毕竟GitHub在国外，把图片放在单独的cdn服务器上会使你的博客加载起来更快速
+
+### 七牛云
+
+其实七牛云不只是可以做图片服务器，现在也有的云主机等云服务，选择它是因为注册并实名认证之后，将免费享有10GB存储空间，用来存图片刚刚的，下面介绍一下怎么使用七牛云
+
+1. 首先要先[注册](https://portal.qiniu.com/signup/choice)一个账户
+
+   {% qnimg hello-world-15.png title:七牛云注册 alt:七牛云注册 %}
+
+   点击申请个人用户，然后按照要求一步一步来就行了
+
+2. 登录之后，点击首页管理控制台，来到自己的控制台
+
+   {% qnimg hello-world-16.png title:七牛控制台 alt:七牛控制台 %}
+
+   点击添加对象存储
+
+   {% qnimg hello-world-17.png title:新建存储空间 alt:新建存储空间 %}
+
+   自定义存储空间名称（记下来，后面插件会用到），这样空间就创建好了
+
+3. 点击内容管理，获取外链默认域名（如：`xxxxxx.bkt.clouddn.com`），记下来等会插件要用到
+
+4. 点击个人面板---密钥管理，记下当前使用的AK和SK，等会插件要用到
+
+### hexo-qiniu-sync 插件 
+
+这个是为了你可以方便的同步本地的图片与引用七牛云上的图片的插件，安装配置步骤如下：
+
+1. 使用git bash或者cmd进入hexo主目录，运行
+
+   ```git bash
+   npm install hexo-qiniu-sync --save
+   ```
+
+2. 在站点的配置文件 `_config.yml`中添加如下配置：
+
+   ```yml
+   qiniu:
+     offline: false // 是否离线，true时，在本地预览时使用本地资源，省流量；false时，本地预览也走云端，可以验证能否正确访问
+     sync: true // 是否同步
+     bucket: 存储空间名称
+     access_key: 刚才保存的AK
+     secret_key: 刚才保存的SK
+     dirPrefix: // 文件夹前缀，可以为空
+     urlPrefix: http://xxxxxx.bkt.clouddn.com（刚才保存的外链默认域名）
+     local_dir: cdn // 本地静态资源路径，与source文件夹同级
+     update_exist: true // 是否更新已经存在的静态文件
+     image:
+       folder: images // 图片存放目录，在local_dir下面，如：cdn/images
+       extend:
+     js:
+       folder: js // js文件存放目录，同上
+     css:
+       folder: css // css文件存放目录，同上
+   ```
+
+   上述提到的所有文件夹都需要自己建立完后，目录结构如下：
+
+   ```explorer
+   |...
+   ├─cdn
+   │ ├─css
+   │ ├─images
+   │ └─js
+   ├─source
+   |...
+   ```
+
+3. 引用图片，如果你想引用`cdn/images`下面的`demo.jpg`，只需要在文章插入：
+
+   ```markdown
+   {% qnimg demo.jpg %}
+   ```
+
+   加入title和alt：
+
+   ```
+   {% qnimg demo.jpg title:demo alt:demo %}
+   ```
+
+   更多参数命令可以看这个插件的[官方文档](https://github.com/gyk001/hexo-qiniu-sync)
+
+4. 同步到七牛云，git bash进入hexo文件夹，运行：
+
+   ```git bash
+   hexo qiniu s
+   ```
+
+   记住，图片只有同步到七牛云之后，在博客才能引用到，所以在使用上面的一键发布命令之前，必须先使用同步命令将图片同步到七牛云
+
+### 结语
+
+到这里，一个比较完整的博客算是搭完了，剩下的什么换主题，加emoji表情之类的我就不详细说了，都很简单，这里就不说了，希望可以作为自己一个好的开始吧，最近太懒了，要振奋起来了:fried_shrimp:
