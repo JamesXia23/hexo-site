@@ -34,7 +34,7 @@ date:
 - 安装markdown相关插件
     - 装完packet control后，在ST3中使用快捷键ctrl + shift + p ，输入install，选择install package：
 
-    {% qnimg post1-1.png title:install alt:install %}
+    {% qnimg hello-world-1.png title:install alt:install %}
 
     - 搜索 MarkdownEditing 安装
 
@@ -82,7 +82,7 @@ date:
     node --version
     ```
 
-    {% qnimg post1-3.png title:version alt:version %}
+    {% qnimg hello-world-2.png title:version alt:version %}
 
 ## 安装 Hexo
 重头戏来了，安装完 git 和 Node.js 后，就要来安装我们的博客系统了，附上[官方文档](https://hexo.io/zh-cn/docs/)
@@ -95,7 +95,7 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 
 * 打开git bash（必须先配置好自己的登录信息），cd进入你的本地仓库文件夹，比如我的是用户目录下的Documents/GitHub：
 
-    {% qnimg post1-4.png title:本地仓库 alt:本地仓库 %}
+    {% qnimg hello-world-3.png title:本地仓库 alt:本地仓库 %}
 
 * 运行 git 命令，克隆仓库：
 
@@ -103,11 +103,11 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
     git clone https://github.com/用户名/仓库名.git
     ```
 
-    {% qnimg post1-5.png title:克隆仓库 alt:克隆仓库 %}
+    {% qnimg hello-world-4.png title:克隆仓库 alt:克隆仓库 %}
 
     之后你的本地仓库文件夹下就会多了一个文件夹，名称就是你的仓库名：
 
-    {% qnimg post1-6.png title:本地仓库 alt:本地仓库 %}
+    {% qnimg hello-world-5.png title:本地仓库 alt:本地仓库 %}
 
     PS：这里说明一下为什么要搞个仓库来保存网站的文件，这是为了以后迁移方便，即使你网站文件放在服务器上，难保永远都在这台服务器写博客，后面会再讲如何迁移。
 
@@ -126,7 +126,7 @@ Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（�
 
     这里folder名称任取，最好不要是中文，我就取hexo：
 
-    {% qnimg post1-7.png title:初始化 alt:初始化 %}
+    {% qnimg hello-world-6.png title:初始化 alt:初始化 %}
 
     看到 start blogging with Hexo！就说明你成功了。。。。一大半~
 
@@ -212,9 +212,55 @@ PS：需要注意的一点是，所有配置项的值跟冒号之间一定要用
 hexo clean && hexo g -d
 ```
 
-{% qnimg post1-8.png title:发布到github alt:发布到github %}
+{% qnimg hello-world-7.png title:发布到github alt:发布到github %}
 
 显示上述图片，说明发布成功，直接打开浏览器试试：github用户名.github.io，网站就搭建完毕了
+
+### 绑定个人域名
+
+刚才我们已经搭建了可以外网访问的博客，但是域名是github给的，如果我们想要使用自己的域名访问怎么办呢？
+
+1. 注册自己的域名，我选择在[阿里云](https://wanwang.aliyun.com/domain)上买，其实其他云上面也可以买
+
+{% qnimg hello-world-8.png title:域名搜索 alt:域名搜索 %}
+
+2. 搜索自己喜欢的域名，只要还没被注册就可以买了，购买也很简单，用支付宝付款就行了
+
+{% qnimg hello-world-9.png title:域名搜索结果 alt:域名搜索结果 %}
+
+购买的时候记得买一下域名解析的服务
+
+{% qnimg hello-world-10.png title:域名解析 alt:域名解析 %}
+
+3. 付款之后会让你做实名认证，也是按照提示来就行，一般1个小时内就给你批下来了
+
+4. 批下来后，在自己阿里云控制台就可以看见域名了
+
+   {% qnimg hello-world-11.png title:阿里云控制台 alt:阿里云控制台 %}
+
+5. 点击域名后面的管理—域名解析
+
+   {% qnimg hello-world-12.png title:域名解析 alt:域名解析 %}
+
+6. 添加一条记录
+
+   {% qnimg hello-world-13.png title:添加域名解析 alt:添加域名解析 %}
+
+   添加后就会出现一条域名解析记录了
+
+7. 接下来在hexo的source文件夹下面新建一个文件`CNAME`，注意名称一定要大写，而且不能有后缀，然后在文件里面输入刚才配的域名
+
+   {% qnimg hello-world-14.png title:CNAME alt:CNAME %}
+
+   保存，退出
+
+8. 然后使用刚才的万能命令，将文件发布到github的博客那个仓库里面去
+
+   ```
+   hexo clean && hexo g -d
+   ```
+
+9. 访问试试看：`blog.jamesxia.cn`，看到博客就说明成功了~~~
 
 ## 图床
 
